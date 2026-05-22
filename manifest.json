@@ -1,0 +1,17 @@
+{
+  "name": "Grocery Tracker",
+  "short_name": "Groceries",
+  "description": "Minimal grocery expense tracker for shared rooms and flatmates.",
+  "start_url": "/Grocery-tracker/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "trolley_pro_icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
