@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Split — Room Grocery Tracker</title>
+<title>Split — Room Grocery Tracker</title>
 
-  <meta name="description" content="Minimal grocery expense tracker for roommates and shared rooms.">
-  <meta name="theme-color" content="#111111">
+<meta name="description" content="Minimal grocery expense tracker for roommates and shared rooms.">
+<meta name="theme-color" content="#111111">
 
-  <link rel="manifest" href="manifest.json">
+<link rel="manifest" href="manifest.json">
 
-  <link rel="icon" type="image/svg+xml" href="trolley_pro_icon.svg">
-  <link rel="apple-touch-icon" href="trolley_pro_icon.svg">
+<link rel="icon" type="image/svg+xml" href="trolley_pro_icon.svg">
+<link rel="apple-touch-icon" href="trolley_pro_icon.svg">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600&family=Syne:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600&family=Syne:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -36,196 +36,127 @@
   --font-d:'Unbounded',sans-serif;
   --font-b:'Syne',sans-serif;
 }
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);min-height:100vh}
+input,button{font-family:var(--font-b)}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type=number]{-moz-appearance:textfield}
+::placeholder{color:var(--dim)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px}
 
-html{
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
+.app{max-width:440px;margin:0 auto;padding:2.25rem 1.25rem 5rem}
 
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--font-b);
-  min-height:100vh;
-}
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem}
+.logo{font-family:var(--font-d);font-size:12px;font-weight:600;letter-spacing:.18em;color:var(--accent)}
+.hdr-right{display:flex;align-items:center;gap:10px}
+.period{font-size:12px;color:var(--muted);cursor:pointer;transition:color .2s}
+.period:hover{color:var(--text)}
+.period-input{background:transparent;border:none;border-bottom:1px solid var(--border-hi);outline:none;font-family:var(--font-b);font-size:12px;color:var(--text);width:130px;padding:1px 0 3px}
+.np-btn{font-size:11px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:20px;padding:5px 11px;cursor:pointer;letter-spacing:.02em;transition:all .2s;font-family:var(--font-b)}
+.np-btn:hover{border-color:var(--border-hi);color:var(--text)}
 
-.app{
-  max-width:440px;
-  margin:0 auto;
-  padding:2.25rem 1.25rem 5rem;
-}
+/* HERO */
+.hero{margin-bottom:2.25rem;padding-bottom:2.25rem;border-bottom:1px solid var(--border)}
+.hero-lbl{font-size:10px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem}
+.hero-amt{font-family:var(--font-d);font-size:clamp(40px,10vw,62px);font-weight:300;letter-spacing:-.03em;line-height:1;margin-bottom:1.25rem;color:var(--text);transition:color .3s}
+.hero-amt.lit{color:var(--accent)}
+.hero-stats{display:flex;gap:2rem}
+.stat-lbl{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.stat-val{font-size:15px;font-weight:500}
 
-.hdr{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:2.75rem;
-}
+/* ADD */
+.add-wrap{margin-bottom:2rem}
+.add-row{display:flex;gap:8px;margin-bottom:7px}
+.amt-wrap{position:relative;flex:1}
+.amt-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:var(--font-d);font-size:15px;color:var(--muted);pointer-events:none;font-weight:300}
+.amt-input{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:11px;padding:14px 14px 14px 32px;font-family:var(--font-d);font-size:21px;font-weight:300;color:var(--text);outline:none;letter-spacing:-.025em;transition:border-color .2s;-webkit-appearance:none}
+.amt-input:focus{border-color:var(--border-hi)}
+.amt-input.err{border-color:rgba(255,80,80,.5)}
+.add-btn{background:var(--accent);border:none;border-radius:11px;width:50px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;color:#090908}
+.add-btn:hover{background:var(--accent-hover);transform:scale(1.04)}
+.add-btn:active{transform:scale(.96)}
+.add-btn.ok{background:var(--green);color:#090908}
+.note-input{width:100%;background:transparent;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--muted);outline:none;transition:border-color .2s,color .2s}
+.note-input:focus{border-color:var(--border-hi);color:var(--text)}
 
-.logo{
-  font-family:var(--font-d);
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.18em;
-  color:var(--accent);
-}
+/* SECTION LABEL */
+.slbl{font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
 
-.hero{
-  margin-bottom:2.25rem;
-  padding-bottom:2.25rem;
-  border-bottom:1px solid var(--border);
-}
+/* MEMBERS */
+.members{margin-bottom:1.75rem}
+.members-hdr{margin-bottom:10px}
+.member{display:flex;align-items:center;padding:11px 0;border-bottom:1px solid var(--border);gap:12px}
+.m-name{flex:1;font-size:14px;font-weight:500;cursor:text;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:color .2s}
+.m-name-inp{flex:1;background:transparent;border:none;border-bottom:1px solid var(--border-hi);outline:none;font-family:var(--font-b);font-size:14px;font-weight:500;color:var(--text);padding:0 0 2px;min-width:0}
+.m-amt{font-family:var(--font-d);font-size:12px;font-weight:300;color:var(--muted);min-width:68px;text-align:right;letter-spacing:-.01em;transition:color .2s}
+.member.done .m-name{color:var(--green);text-decoration:line-through;text-decoration-color:rgba(75,217,138,.35)}
+.member.done .m-amt{color:var(--green)}
+.s-btn{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border-hi);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.s-btn:hover{border-color:var(--green)}
+.s-btn.on{background:var(--green);border-color:var(--green)}
+.s-btn.on svg{stroke:#090908}
 
-.hero-lbl{
-  font-size:10px;
-  color:var(--muted);
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  margin-bottom:.75rem;
-}
+/* HISTORY */
+.hist-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;cursor:pointer;padding:0;margin-bottom:0}
+.hist-toggle:hover .slbl{color:var(--text)}
+.chev{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s;flex-shrink:0}
+.chev.open{transform:rotate(180deg)}
+.hist-list{margin-top:10px;display:flex;flex-direction:column;gap:2px}
+.h-item{display:flex;align-items:center;padding:10px 12px;background:var(--s1);border-radius:9px;gap:10px;animation:fi .2s ease-out both}
+@keyframes fi{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.h-note{flex:1;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-date{font-size:11px;color:var(--muted);flex-shrink:0}
+.h-amt{font-family:var(--font-d);font-size:12px;font-weight:300;flex-shrink:0;min-width:66px;text-align:right}
+.del-btn{background:none;border:none;cursor:pointer;color:var(--dim);display:flex;align-items:center;transition:color .15s;padding:2px;flex-shrink:0}
+.del-btn:hover{color:#FF5C5C}
+.empty{text-align:center;padding:2rem 0;font-size:13px;color:var(--muted)}
 
-.hero-amt{
-  font-family:var(--font-d);
-  font-size:clamp(40px,10vw,62px);
-  font-weight:300;
-  letter-spacing:-.03em;
-  line-height:1;
-  margin-bottom:1.25rem;
-}
-
-.add-wrap{
-  margin-bottom:2rem;
-}
-
-.add-row{
-  display:flex;
-  gap:8px;
-  margin-bottom:7px;
-}
-
-.amt-input{
-  flex:1;
-  background:var(--s2);
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:14px;
-  font-size:21px;
-  color:var(--text);
-  outline:none;
-}
-
-.add-btn{
-  background:var(--accent);
-  border:none;
-  border-radius:11px;
-  width:60px;
-  cursor:pointer;
-  font-size:24px;
-}
-
-.note-input{
-  width:100%;
-  background:transparent;
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:10px 14px;
-  font-size:13px;
-  color:var(--text);
-  outline:none;
-}
-
-.hist-list{
-  margin-top:10px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.h-item{
-  display:flex;
-  justify-content:space-between;
-  background:var(--s1);
-  padding:12px;
-  border-radius:9px;
-}
+/* PULSE ANIMATION */
+@keyframes pulse{0%{opacity:1}30%{opacity:.35}100%{opacity:1}}
+.pulse{animation:pulse .45s ease-out}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.shake{animation:shake .3s ease-out}
 </style>
 </head>
 
 <body>
+<div class="app" id="root"></div>
 
-<div class="app">
+<script>
+const KEY='split_v1';
+const DEFAULT_MEMBERS=['Me','Prabitra','Darshan','JB','Rondeep','+ Add name'];
 
+let S={entries:[],members:[...DEFAULT_MEMBERS],settled:{},period:getPeriod()};
+let showHist=false,editIdx=null,editVal='',editingPeriod=false;
+
+function getPeriod(){return new Date().toLocaleDateString('en-IN',{month:'long',year:'numeric'})}
+function fmt(n){return '₹'+Math.round(n).toLocaleString('en-IN')}
+function load(){try{const r=localStorage.getItem(KEY);if(r)S={...S,...JSON.parse(r)}}catch{}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch{}}
+
+function render(){
+  const total=S.entries.reduce((s,e)=>s+e.amount,0);
+  const share=total/6;
+  const sc=Object.values(S.settled).filter(Boolean).length;
+
+  document.getElementById('root').innerHTML=`
 <header class="hdr">
   <span class="logo">SPLIT</span>
 </header>
 
 <section class="hero">
-  <p class="hero-lbl">Each person owes</p>
-  <div class="hero-amt" id="share">₹0</div>
+  <p class="hero-lbl">Each person owes you</p>
+  <div class="hero-amt${total>0?' lit':''}" id="hnum">${total>0?fmt(share):'—'}</div>
 </section>
+`;
 
-<section class="add-wrap">
-  <div class="add-row">
-    <input class="amt-input" id="amount" type="number" placeholder="Amount">
-    <button class="add-btn" onclick="addExpense()">+</button>
-  </div>
-
-  <input class="note-input" id="note" type="text" placeholder="Milk, vegetables, etc.">
-</section>
-
-<section class="hist-list" id="history"></section>
-
-</div>
-
-<script>
-const STORAGE_KEY = 'split_tracker_data';
-
-let expenses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-
-function save() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(expenses));
 }
 
-function format(n) {
-  return '₹' + Number(n).toLocaleString('en-IN');
-}
-
-function render() {
-  const total = expenses.reduce((sum, e) => sum + e.amount, 0);
-  const share = total / 6;
-
-  document.getElementById('share').innerText = format(share);
-
-  const history = document.getElementById('history');
-
-  history.innerHTML = expenses.map(e => `
-    <div class="h-item">
-      <span>${e.note}</span>
-      <span>${format(e.amount)}</span>
-    </div>
-  `).join('');
-}
-
-function addExpense() {
-  const amountInput = document.getElementById('amount');
-  const noteInput = document.getElementById('note');
-
-  const amount = parseFloat(amountInput.value);
-
-  if (!amount || amount <= 0) return;
-
-  expenses.unshift({
-    amount,
-    note: noteInput.value || 'Groceries'
-  });
-
-  save();
-  render();
-
-  amountInput.value = '';
-  noteInput.value = '';
-}
-
+load();
 render();
 </script>
 
