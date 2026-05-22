@@ -36,255 +36,212 @@
   --font-d:'Unbounded',sans-serif;
   --font-b:'Syne',sans-serif;
 }
-html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{background:var(--bg);color:var(--text);font-family:var(--font-b);min-height:100vh}
-input,button{font-family:var(--font-b)}
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
-input[type=number]{-moz-appearance:textfield}
-::placeholder{color:var(--dim)}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px}
 
-.app{max-width:440px;margin:0 auto;padding:2.25rem 1.25rem 5rem}
+html{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
 
-/* HEADER */
-.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem}
-.logo{font-family:var(--font-d);font-size:12px;font-weight:600;letter-spacing:.18em;color:var(--accent)}
-.hdr-right{display:flex;align-items:center;gap:10px}
-.period{font-size:12px;color:var(--muted);cursor:pointer;transition:color .2s}
-.period:hover{color:var(--text)}
-.period-input{background:transparent;border:none;border-bottom:1px solid var(--border-hi);outline:none;font-family:var(--font-b);font-size:12px;color:var(--text);width:130px;padding:1px 0 3px}
-.np-btn{font-size:11px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:20px;padding:5px 11px;cursor:pointer;letter-spacing:.02em;transition:all .2s;font-family:var(--font-b)}
-.np-btn:hover{border-color:var(--border-hi);color:var(--text)}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-b);
+  min-height:100vh;
+}
 
-/* HERO */
-.hero{margin-bottom:2.25rem;padding-bottom:2.25rem;border-bottom:1px solid var(--border)}
-.hero-lbl{font-size:10px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem}
-.hero-amt{font-family:var(--font-d);font-size:clamp(40px,10vw,62px);font-weight:300;letter-spacing:-.03em;line-height:1;margin-bottom:1.25rem;color:var(--text);transition:color .3s}
-.hero-amt.lit{color:var(--accent)}
-.hero-stats{display:flex;gap:2rem}
-.stat-lbl{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
-.stat-val{font-size:15px;font-weight:500}
+.app{
+  max-width:440px;
+  margin:0 auto;
+  padding:2.25rem 1.25rem 5rem;
+}
 
-/* ADD */
-.add-wrap{margin-bottom:2rem}
-.add-row{display:flex;gap:8px;margin-bottom:7px}
-.amt-wrap{position:relative;flex:1}
-.amt-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:var(--font-d);font-size:15px;color:var(--muted);pointer-events:none;font-weight:300}
-.amt-input{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:11px;padding:14px 14px 14px 32px;font-family:var(--font-d);font-size:21px;font-weight:300;color:var(--text);outline:none;letter-spacing:-.025em;transition:border-color .2s;-webkit-appearance:none}
-.amt-input:focus{border-color:var(--border-hi)}
-.amt-input.err{border-color:rgba(255,80,80,.5)}
-.add-btn{background:var(--accent);border:none;border-radius:11px;width:50px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;color:#090908}
-.add-btn:hover{background:var(--accent-hover);transform:scale(1.04)}
-.add-btn:active{transform:scale(.96)}
-.add-btn.ok{background:var(--green);color:#090908}
-.note-input{width:100%;background:transparent;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--muted);outline:none;transition:border-color .2s,color .2s}
-.note-input:focus{border-color:var(--border-hi);color:var(--text)}
+.hdr{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:2.75rem;
+}
 
-/* SECTION LABEL */
-.slbl{font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.logo{
+  font-family:var(--font-d);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.18em;
+  color:var(--accent);
+}
 
-/* MEMBERS */
-.members{margin-bottom:1.75rem}
-.members-hdr{margin-bottom:10px}
-.member{display:flex;align-items:center;padding:11px 0;border-bottom:1px solid var(--border);gap:12px}
-.m-name{flex:1;font-size:14px;font-weight:500;cursor:text;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:color .2s}
-.m-name-inp{flex:1;background:transparent;border:none;border-bottom:1px solid var(--border-hi);outline:none;font-family:var(--font-b);font-size:14px;font-weight:500;color:var(--text);padding:0 0 2px;min-width:0}
-.m-amt{font-family:var(--font-d);font-size:12px;font-weight:300;color:var(--muted);min-width:68px;text-align:right;letter-spacing:-.01em;transition:color .2s}
-.member.done .m-name{color:var(--green);text-decoration:line-through;text-decoration-color:rgba(75,217,138,.35)}
-.member.done .m-amt{color:var(--green)}
-.s-btn{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border-hi);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
-.s-btn:hover{border-color:var(--green)}
-.s-btn.on{background:var(--green);border-color:var(--green)}
-.s-btn.on svg{stroke:#090908}
+.hero{
+  margin-bottom:2.25rem;
+  padding-bottom:2.25rem;
+  border-bottom:1px solid var(--border);
+}
 
-/* HISTORY */
-.hist-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;cursor:pointer;padding:0;margin-bottom:0}
-.hist-toggle:hover .slbl{color:var(--text)}
-.chev{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s;flex-shrink:0}
-.chev.open{transform:rotate(180deg)}
-.hist-list{margin-top:10px;display:flex;flex-direction:column;gap:2px}
-.h-item{display:flex;align-items:center;padding:10px 12px;background:var(--s1);border-radius:9px;gap:10px;animation:fi .2s ease-out both}
-@keyframes fi{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
-.h-note{flex:1;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.h-date{font-size:11px;color:var(--muted);flex-shrink:0}
-.h-amt{font-family:var(--font-d);font-size:12px;font-weight:300;flex-shrink:0;min-width:66px;text-align:right}
-.del-btn{background:none;border:none;cursor:pointer;color:var(--dim);display:flex;align-items:center;transition:color .15s;padding:2px;flex-shrink:0}
-.del-btn:hover{color:#FF5C5C}
-.empty{text-align:center;padding:2rem 0;font-size:13px;color:var(--muted)}
+.hero-lbl{
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-bottom:.75rem;
+}
 
-/* PULSE ANIMATION */
-@keyframes pulse{0%{opacity:1}30%{opacity:.35}100%{opacity:1}}
-.pulse{animation:pulse .45s ease-out}
-@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
-.shake{animation:shake .3s ease-out}
+.hero-amt{
+  font-family:var(--font-d);
+  font-size:clamp(40px,10vw,62px);
+  font-weight:300;
+  letter-spacing:-.03em;
+  line-height:1;
+  margin-bottom:1.25rem;
+}
+
+.add-wrap{
+  margin-bottom:2rem;
+}
+
+.add-row{
+  display:flex;
+  gap:8px;
+  margin-bottom:7px;
+}
+
+.amt-input{
+  flex:1;
+  background:var(--s2);
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:14px;
+  font-size:21px;
+  color:var(--text);
+  outline:none;
+}
+
+.add-btn{
+  background:var(--accent);
+  border:none;
+  border-radius:11px;
+  width:60px;
+  cursor:pointer;
+  font-size:24px;
+}
+
+.note-input{
+  width:100%;
+  background:transparent;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px 14px;
+  font-size:13px;
+  color:var(--text);
+  outline:none;
+}
+
+.hist-list{
+  margin-top:10px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.h-item{
+  display:flex;
+  justify-content:space-between;
+  background:var(--s1);
+  padding:12px;
+  border-radius:9px;
+}
 </style>
 </head>
-  <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js')
-    .then(() => console.log('SW registered'));
-}
-</script>
+
 <body>
-<div class="app" id="root"></div>
-<script>
-const KEY='split_v1';
-const DEFAULT_MEMBERS=['Me','Prabitra','Darshan','JB','Rondeep','+ Add name'];
 
-let S={entries:[],members:[...DEFAULT_MEMBERS],settled:{},period:getPeriod()};
-let showHist=false,editIdx=null,editVal='',editingPeriod=false;
+<div class="app">
 
-function getPeriod(){return new Date().toLocaleDateString('en-IN',{month:'long',year:'numeric'})}
-function fmt(n){return '₹'+Math.round(n).toLocaleString('en-IN')}
-function load(){try{const r=localStorage.getItem(KEY);if(r)S={...S,...JSON.parse(r)}}catch{}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch{}}
-
-function render(){
-  const total=S.entries.reduce((s,e)=>s+e.amount,0);
-  const share=total/6;
-  const sc=Object.values(S.settled).filter(Boolean).length;
-
-  document.getElementById('root').innerHTML=`
 <header class="hdr">
   <span class="logo">SPLIT</span>
-  <div class="hdr-right">
-    ${editingPeriod
-      ?`<input class="period-input" id="pi" value="${S.period}">`
-      :`<span class="period" id="plbl" title="Tap to rename">${S.period}</span>`}
-    <button class="np-btn" onclick="newPeriod()">New period</button>
-  </div>
 </header>
 
 <section class="hero">
-  <p class="hero-lbl">Each person owes you</p>
-  <div class="hero-amt${total>0?' lit':''}" id="hnum">${total>0?fmt(share):'—'}</div>
-  <div class="hero-stats">
-    <div><p class="stat-lbl">Total spent</p><p class="stat-val">${fmt(total)}</p></div>
-    <div><p class="stat-lbl">Purchases</p><p class="stat-val">${S.entries.length}</p></div>
-    <div><p class="stat-lbl">Settled</p><p class="stat-val">${sc}<span style="color:var(--muted);font-size:13px"> / 5</span></p></div>
-  </div>
+  <p class="hero-lbl">Each person owes</p>
+  <div class="hero-amt" id="share">₹0</div>
 </section>
 
 <section class="add-wrap">
   <div class="add-row">
-    <div class="amt-wrap">
-      <span class="amt-prefix">₹</span>
-      <input class="amt-input" id="amt" type="number" min="0" step="any" placeholder="0" autocomplete="off">
-    </div>
-    <button class="add-btn" id="abtn" onclick="addEntry()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-      </svg>
-    </button>
+    <input class="amt-input" id="amount" type="number" placeholder="Amount">
+    <button class="add-btn" onclick="addExpense()">+</button>
   </div>
-  <input class="note-input" id="note" type="text" placeholder="What for? (optional — veggies, milk, etc.)" maxlength="60">
+
+  <input class="note-input" id="note" type="text" placeholder="Milk, vegetables, etc.">
 </section>
 
-<section class="members">
-  <div class="members-hdr"><span class="slbl">Roommates</span></div>
-  ${[1,2,3,4,5].map(i=>{
-    const done=!!S.settled[i];
-    return`<div class="member${done?' done':''}">
-      ${editIdx===i
-        ?`<input class="m-name-inp" id="ni" value="${editVal}">`
-        :`<span class="m-name" onclick="startEdit(${i})">${S.members[i]}</span>`}
-      <span class="m-amt">${total>0?fmt(share):'—'}</span>
-      <button class="s-btn${done?' on':''}" onclick="toggleSettle(${i})" title="${done?'Unmark':'Mark settled'}">
-        ${done?`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`:''}
-      </button>
-    </div>`;
-  }).join('')}
-</section>
+<section class="hist-list" id="history"></section>
 
-<section>
-  <button class="hist-toggle" onclick="toggleHist()">
-    <span class="slbl">Purchases (${S.entries.length})</span>
-    <svg class="chev${showHist?' open':''}" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-  </button>
-  ${showHist?`<div class="hist-list">${
-    S.entries.length===0
-    ?`<p class="empty">No purchases yet</p>`
-    :S.entries.map(e=>`
-      <div class="h-item">
-        <span class="h-note">${e.note}</span>
-        <span class="h-date">${e.date}</span>
-        <span class="h-amt">${fmt(e.amount)}</span>
-        <button class="del-btn" onclick="del(${e.id})" title="Delete">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/>
-          </svg>
-        </button>
-      </div>`).join('')
-  }</div>`:''}
-</section>`;
+</div>
 
-  // Bind events
-  const amt=document.getElementById('amt');
-  const note=document.getElementById('note');
-  const plbl=document.getElementById('plbl');
-  const pi=document.getElementById('pi');
-  const ni=document.getElementById('ni');
+<script>
+const STORAGE_KEY = 'split_tracker_data';
 
-  if(amt){
-    amt.focus();
-    amt.addEventListener('keydown',e=>{if(e.key==='Enter')addEntry()});
-  }
-  if(note) note.addEventListener('keydown',e=>{if(e.key==='Enter')addEntry()});
-  if(plbl) plbl.addEventListener('click',()=>{editingPeriod=true;render()});
-  if(pi){
-    pi.focus(); pi.select();
-    pi.addEventListener('blur',e=>{S.period=e.target.value.trim()||S.period;editingPeriod=false;save();render()});
-    pi.addEventListener('keydown',e=>{if(e.key==='Enter')e.target.blur()});
-  }
-  if(ni){
-    ni.focus(); ni.select();
-    ni.addEventListener('input',e=>{editVal=e.target.value});
-    ni.addEventListener('blur',()=>{
-      if(editVal.trim()){S.members[editIdx]=editVal.trim();save()}
-      editIdx=null;render();
-    });
-    ni.addEventListener('keydown',e=>{if(e.key==='Enter')e.target.blur()});
-  }
+let expenses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(expenses));
 }
 
-function addEntry(){
-  const amtEl=document.getElementById('amt');
-  const noteEl=document.getElementById('note');
-  const v=parseFloat(amtEl?.value);
-  if(!v||isNaN(v)||v<=0){
-    amtEl?.classList.add('err','shake');
-    setTimeout(()=>amtEl?.classList.remove('err','shake'),400);
-    return;
-  }
-  S.entries.unshift({
-    id:Date.now(),
-    amount:v,
-    note:noteEl?.value.trim()||'Groceries',
-    date:new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short'})
+function format(n) {
+  return '₹' + Number(n).toLocaleString('en-IN');
+}
+
+function render() {
+  const total = expenses.reduce((sum, e) => sum + e.amount, 0);
+  const share = total / 6;
+
+  document.getElementById('share').innerText = format(share);
+
+  const history = document.getElementById('history');
+
+  history.innerHTML = expenses.map(e => `
+    <div class="h-item">
+      <span>${e.note}</span>
+      <span>${format(e.amount)}</span>
+    </div>
+  `).join('');
+}
+
+function addExpense() {
+  const amountInput = document.getElementById('amount');
+  const noteInput = document.getElementById('note');
+
+  const amount = parseFloat(amountInput.value);
+
+  if (!amount || amount <= 0) return;
+
+  expenses.unshift({
+    amount,
+    note: noteInput.value || 'Groceries'
   });
-  save();render();
-  const h=document.getElementById('hnum');
-  if(h){h.classList.remove('pulse');void h.offsetWidth;h.classList.add('pulse')}
-  const btn=document.getElementById('abtn');
-  if(btn){
-    btn.classList.add('ok');
-    setTimeout(()=>btn?.classList.remove('ok'),700);
-  }
+
+  save();
+  render();
+
+  amountInput.value = '';
+  noteInput.value = '';
 }
 
-function del(id){S.entries=S.entries.filter(e=>e.id!==id);save();render()}
-function toggleSettle(i){S.settled[i]=!S.settled[i];save();render()}
-function startEdit(i){editIdx=i;editVal=S.members[i];render()}
-function toggleHist(){showHist=!showHist;render()}
-function newPeriod(){
-  if(!confirm('Start a new period? All entries and settlements will be cleared.'))return;
-  S.entries=[];S.settled={};S.period=getPeriod();showHist=false;save();render();
-}
-
-load();render();
+render();
 </script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => {
+        console.log('Service Worker Registered');
+      })
+      .catch(err => {
+        console.log('SW Error:', err);
+      });
+  });
+}
+</script>
+
 </body>
 </html>
