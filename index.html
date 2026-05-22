@@ -122,6 +122,12 @@ input[type=number]{-moz-appearance:textfield}
 .shake{animation:shake .3s ease-out}
 </style>
 </head>
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+    .then(() => console.log('SW registered'));
+}
+</script>
 <body>
 <div class="app" id="root"></div>
 <script>
