@@ -1,14 +1,15 @@
 {
   "name": "Grocery Tracker",
-  "short_name": "Groceries",
-  "description": "Minimal grocery expense tracker for shared rooms and flatmates.",
-  "start_url": "/Grocery-tracker/",
-  "scope": "/Grocery-tracker/",
+  "short_name": "Split",
+  "description": "Minimal grocery expense tracker for roommates.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#111111",
-  "theme_color": "#111111",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "orientation": "portrait",
   "lang": "en",
+
   "icons": [
     {
       "src": "icon-192.png",
