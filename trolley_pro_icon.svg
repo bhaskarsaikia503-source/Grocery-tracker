@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 522 522" width="100%" role="img" style="">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Trolley – grocery expense tracker icon</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Minimal dark app icon with a single lime-green stroke forming a shopping cart with an upward trend arrow, in the style of the Split icon.</desc>
+
+  <rect width="512" height="512" rx="115" fill="#0A0A08" style="fill:rgb(10, 10, 8);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!--
+    Design rationale:
+    - Single continuous stroke path family, same weight as reference (stroke-width ~52)
+    - Cart body drawn as open rectangle: handle bar → drop → base
+    - Trend arrow rising from inside the cart = expense tracking concept
+    - Two wheel dots = only filled shapes, give visual grounding
+    - Everything centered, generous negative space on all sides
+  -->
+
+  <!-- Cart handle -->
+  <line x1="118" y1="156" x2="198" y2="156" stroke="#C8FF47" stroke-width="50" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(200, 255, 71);color:rgb(0, 0, 0);stroke-width:50px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Cart body: left wall down, base right, right wall up partway -->
+  <polyline points="168,156 168,340 344,340 344,248" fill="none" stroke="#C8FF47" stroke-width="50" stroke-linecap="round" stroke-linejoin="round" style="fill:none;stroke:rgb(200, 255, 71);color:rgb(0, 0, 0);stroke-width:50px;stroke-linecap:round;stroke-linejoin:round;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Trend arrow inside cart: rising line -->
+  <polyline points="198,300 252,240 306,270 356,195" fill="none" stroke="#C8FF47" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.38" style="fill:none;stroke:rgb(200, 255, 71);color:rgb(0, 0, 0);stroke-width:34px;stroke-linecap:round;stroke-linejoin:round;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Arrow tip chevron -->
+  <polyline points="330,182 358,193 370,222" fill="none" stroke="#C8FF47" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.38" style="fill:none;stroke:rgb(200, 255, 71);color:rgb(0, 0, 0);stroke-width:34px;stroke-linecap:round;stroke-linejoin:round;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Wheels -->
+  <circle cx="210" cy="384" r="28" fill="#C8FF47" style="fill:rgb(200, 255, 71);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="312" cy="384" r="28" fill="#C8FF47" style="fill:rgb(200, 255, 71);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+</svg>
