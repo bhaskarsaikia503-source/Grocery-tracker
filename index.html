@@ -1,22 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
 <title>Split — Room Grocery Tracker</title>
-
-<meta name="description" content="Minimal grocery expense tracker for roommates and shared rooms.">
-<meta name="theme-color" content="#111111">
-
-<link rel="manifest" href="manifest.json">
-
-<link rel="icon" type="image/svg+xml" href="trolley_pro_icon.svg">
-<link rel="apple-touch-icon" href="trolley_pro_icon.svg">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600&family=Syne:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -122,10 +112,8 @@ input[type=number]{-moz-appearance:textfield}
 .shake{animation:shake .3s ease-out}
 </style>
 </head>
-
 <body>
 <div class="app" id="root"></div>
-
 <script>
 const KEY='split_v1';
 const DEFAULT_MEMBERS=['Me','Prabitra','Darshan','JB','Rondeep','+ Add name'];
@@ -146,33 +134,141 @@ function render(){
   document.getElementById('root').innerHTML=`
 <header class="hdr">
   <span class="logo">SPLIT</span>
+  <div class="hdr-right">
+    ${editingPeriod
+      ?`<input class="period-input" id="pi" value="${S.period}">`
+      :`<span class="period" id="plbl" title="Tap to rename">${S.period}</span>`}
+    <button class="np-btn" onclick="newPeriod()">New period</button>
+  </div>
 </header>
 
 <section class="hero">
   <p class="hero-lbl">Each person owes you</p>
   <div class="hero-amt${total>0?' lit':''}" id="hnum">${total>0?fmt(share):'—'}</div>
+  <div class="hero-stats">
+    <div><p class="stat-lbl">Total spent</p><p class="stat-val">${fmt(total)}</p></div>
+    <div><p class="stat-lbl">Purchases</p><p class="stat-val">${S.entries.length}</p></div>
+    <div><p class="stat-lbl">Settled</p><p class="stat-val">${sc}<span style="color:var(--muted);font-size:13px"> / 5</span></p></div>
+  </div>
 </section>
-`;
 
+<section class="add-wrap">
+  <div class="add-row">
+    <div class="amt-wrap">
+      <span class="amt-prefix">₹</span>
+      <input class="amt-input" id="amt" type="number" min="0" step="any" placeholder="0" autocomplete="off">
+    </div>
+    <button class="add-btn" id="abtn" onclick="addEntry()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+    </button>
+  </div>
+  <input class="note-input" id="note" type="text" placeholder="What for? (optional — veggies, milk, etc.)" maxlength="60">
+</section>
+
+<section class="members">
+  <div class="members-hdr"><span class="slbl">Roommates</span></div>
+  ${[1,2,3,4,5].map(i=>{
+    const done=!!S.settled[i];
+    return`<div class="member${done?' done':''}">
+      ${editIdx===i
+        ?`<input class="m-name-inp" id="ni" value="${editVal}">`
+        :`<span class="m-name" onclick="startEdit(${i})">${S.members[i]}</span>`}
+      <span class="m-amt">${total>0?fmt(share):'—'}</span>
+      <button class="s-btn${done?' on':''}" onclick="toggleSettle(${i})" title="${done?'Unmark':'Mark settled'}">
+        ${done?`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`:''}
+      </button>
+    </div>`;
+  }).join('')}
+</section>
+
+<section>
+  <button class="hist-toggle" onclick="toggleHist()">
+    <span class="slbl">Purchases (${S.entries.length})</span>
+    <svg class="chev${showHist?' open':''}" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  ${showHist?`<div class="hist-list">${
+    S.entries.length===0
+    ?`<p class="empty">No purchases yet</p>`
+    :S.entries.map(e=>`
+      <div class="h-item">
+        <span class="h-note">${e.note}</span>
+        <span class="h-date">${e.date}</span>
+        <span class="h-amt">${fmt(e.amount)}</span>
+        <button class="del-btn" onclick="del(${e.id})" title="Delete">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/>
+          </svg>
+        </button>
+      </div>`).join('')
+  }</div>`:''}
+</section>`;
+
+  // Bind events
+  const amt=document.getElementById('amt');
+  const note=document.getElementById('note');
+  const plbl=document.getElementById('plbl');
+  const pi=document.getElementById('pi');
+  const ni=document.getElementById('ni');
+
+  if(amt){
+    amt.focus();
+    amt.addEventListener('keydown',e=>{if(e.key==='Enter')addEntry()});
+  }
+  if(note) note.addEventListener('keydown',e=>{if(e.key==='Enter')addEntry()});
+  if(plbl) plbl.addEventListener('click',()=>{editingPeriod=true;render()});
+  if(pi){
+    pi.focus(); pi.select();
+    pi.addEventListener('blur',e=>{S.period=e.target.value.trim()||S.period;editingPeriod=false;save();render()});
+    pi.addEventListener('keydown',e=>{if(e.key==='Enter')e.target.blur()});
+  }
+  if(ni){
+    ni.focus(); ni.select();
+    ni.addEventListener('input',e=>{editVal=e.target.value});
+    ni.addEventListener('blur',()=>{
+      if(editVal.trim()){S.members[editIdx]=editVal.trim();save()}
+      editIdx=null;render();
+    });
+    ni.addEventListener('keydown',e=>{if(e.key==='Enter')e.target.blur()});
+  }
 }
 
-load();
-render();
-</script>
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => {
-        console.log('Service Worker Registered');
-      })
-      .catch(err => {
-        console.log('SW Error:', err);
-      });
+function addEntry(){
+  const amtEl=document.getElementById('amt');
+  const noteEl=document.getElementById('note');
+  const v=parseFloat(amtEl?.value);
+  if(!v||isNaN(v)||v<=0){
+    amtEl?.classList.add('err','shake');
+    setTimeout(()=>amtEl?.classList.remove('err','shake'),400);
+    return;
+  }
+  S.entries.unshift({
+    id:Date.now(),
+    amount:v,
+    note:noteEl?.value.trim()||'Groceries',
+    date:new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short'})
   });
+  save();render();
+  const h=document.getElementById('hnum');
+  if(h){h.classList.remove('pulse');void h.offsetWidth;h.classList.add('pulse')}
+  const btn=document.getElementById('abtn');
+  if(btn){
+    btn.classList.add('ok');
+    setTimeout(()=>btn?.classList.remove('ok'),700);
+  }
 }
-</script>
 
+function del(id){S.entries=S.entries.filter(e=>e.id!==id);save();render()}
+function toggleSettle(i){S.settled[i]=!S.settled[i];save();render()}
+function startEdit(i){editIdx=i;editVal=S.members[i];render()}
+function toggleHist(){showHist=!showHist;render()}
+function newPeriod(){
+  if(!confirm('Start a new period? All entries and settlements will be cleared.'))return;
+  S.entries=[];S.settled={};S.period=getPeriod();showHist=false;save();render();
+}
+
+load();render();
+</script>
 </body>
 </html>
